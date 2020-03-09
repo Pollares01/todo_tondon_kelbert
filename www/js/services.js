@@ -29,6 +29,14 @@ myApp.services = {
       // Store data within the element.
       taskItem.data = data;
 
+      const myJSON = JSON.stringify(data);
+
+      const storage = window.localStorage;
+
+      storage.setItem(("tache" + storage.length), myJSON);
+
+
+
       // Add 'completion' functionality when the checkbox changes.
       taskItem.data.onCheckboxChange = function(event) {
         myApp.services.animators.swipe(taskItem, function() {
@@ -100,11 +108,80 @@ myApp.services = {
 
       myApp.services.animators.remove(taskItem, function() {
         // Remove the item before updating the categories.
+
+        const storage = window.localStorage;
+        storage.
+
         taskItem.remove();
         // Check if the category has no items and remove it in that case.
         myApp.services.categories.updateRemove(taskItem.data.category);
       });
+    },
+
+    //meme code de create, mais sans la sauvegarde
+    remettre:  function(data) {
+      // Task item template.
+      var taskItem = ons.createElement(
+          '<ons-list-item tappable category="' + myApp.services.categories.parseId(data.category)+ '">' +
+          '<label class="left">' +
+          '<ons-checkbox></ons-checkbox>' +
+          '</label>' +
+          '<div class="center">' +
+          data.title +
+          '</div>' +
+          '<div class="right">' +
+          '<ons-icon style="color: grey; padding-left: 4px" icon="ion-ios-trash-outline, material:md-delete"></ons-icon>' +
+          '</div>' +
+          '</ons-list-item>'
+      );
+
+      // Store data within the element.
+      taskItem.data = data;
+
+
+
+      // Add 'completion' functionality when the checkbox changes.
+      taskItem.data.onCheckboxChange = function(event) {
+        myApp.services.animators.swipe(taskItem, function() {
+          var listId = (taskItem.parentElement.id === 'pending-list' && event.target.checked) ? '#completed-list' : '#pending-list';
+          document.querySelector(listId).appendChild(taskItem);
+        });
+      };
+
+      taskItem.addEventListener('change', taskItem.data.onCheckboxChange);
+
+      // Add button functionality to remove a task.
+      taskItem.querySelector('.right').onclick = function() {
+        myApp.services.tasks.remove(taskItem);
+      };
+
+      // Add functionality to push 'details_task.html' page with the current element as a parameter.
+      taskItem.querySelector('.center').onclick = function() {
+        document.querySelector('#myNavigator')
+            .pushPage('html/details_task.html',
+                {
+                  animation: 'lift',
+                  data: {
+                    element: taskItem
+                  }
+                }
+            );
+      };
+
+      // Check if it's necessary to create new categories for this item.
+      myApp.services.categories.updateAdd(taskItem.data.category);
+
+      // Add the highlight if necessary.
+      if (taskItem.data.highlight) {
+        taskItem.classList.add('highlight');
+      }
+
+      // Insert urgent tasks at the top and non urgent tasks at the bottom.
+      var pendingList = document.querySelector('#pending-list');
+      pendingList.insertBefore(taskItem, taskItem.data.urgent ? pendingList.firstChild : null);
     }
+
+
   },
 
   /////////////////////
@@ -218,65 +295,65 @@ myApp.services = {
     }
   },
 
-  ////////////////////////
-  // Initial Data Service //
-  ////////////////////////
-  fixtures: [
-    {
-      title: 'Download OnsenUI',
-      category: 'Programming',
-      description: 'Some description.',
-      highlight: false,
-      urgent: false
-    },
-    {
-      title: 'Install Monaca CLI',
-      category: 'Programming',
-      description: 'Some description.',
-      highlight: false,
-      urgent: false
-    },
-    {
-      title: 'Star Onsen UI repo on Github',
-      category: 'Super important',
-      description: 'Some description.',
-      highlight: false,
-      urgent: false
-    },
-    {
-      title: 'Register in the community forum',
-      category: 'Super important',
-      description: 'Some description.',
-      highlight: false,
-      urgent: false
-    },
-    {
-      title: 'Send donations to Fran and Andreas',
-      category: 'Super important',
-      description: 'Some description.',
-      highlight: false,
-      urgent: false
-    },
-    {
-      title: 'Profit',
-      category: '',
-      description: 'Some description.',
-      highlight: false,
-      urgent: false
-    },
-    {
-      title: 'Visit Japan',
-      category: 'Travels',
-      description: 'Some description.',
-      highlight: false,
-      urgent: false
-    },
-    {
-      title: 'Enjoy an Onsen with Onsen UI team',
-      category: 'Personal',
-      description: 'Some description.',
-      highlight: false,
-      urgent: false
-    }
-  ]
+  //////////////////////
+  //Initial Data Service //
+  //////////////////////
+  // fixtures: [
+  //   {
+  //     title: 'Download OnsenUI',
+  //     category: 'Programming',
+  //     description: 'Some description.',
+  //     highlight: false,
+  //     urgent: false
+  //   },
+  //   {
+  //     title: 'Install Monaca CLI',
+  //     category: 'Programming',
+  //     description: 'Some description.',
+  //     highlight: false,
+  //     urgent: false
+  //   },
+  //   {
+  //     title: 'Star Onsen UI repo on Github',
+  //     category: 'Super important',
+  //     description: 'Some description.',
+  //     highlight: false,
+  //     urgent: false
+  //   },
+  //   {
+  //     title: 'Register in the community forum',
+  //     category: 'Super important',
+  //     description: 'Some description.',
+  //     highlight: false,
+  //     urgent: false
+  //   },
+  //   {
+  //     title: 'Send donations to Fran and Andreas',
+  //     category: 'Super important',
+  //     description: 'Some description.',
+  //     highlight: false,
+  //     urgent: false
+  //   },
+  //   {
+  //     title: 'Profit',
+  //     category: '',
+  //     description: 'Some description.',
+  //     highlight: false,
+  //     urgent: false
+  //   },
+  //   {
+  //     title: 'Visit Japan',
+  //     category: 'Travels',
+  //     description: 'Some description.',
+  //     highlight: false,
+  //     urgent: false
+  //   },
+  //   {
+  //     title: 'Enjoy an Onsen with Onsen UI team',
+  //     category: 'Personal',
+  //     description: 'Some description.',
+  //     highlight: false,
+  //     urgent: false
+  //   }
+  // ]
 };
