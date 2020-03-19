@@ -108,7 +108,7 @@ myApp.controllers = {
                 description: page.querySelector('#description-input').value,
                 ugent: element.data.urgent,
                 highlight: page.querySelector('#highlight-input').checked
-              }
+              }, element.data.num
             );
 
             // Set selected category to 'All', refresh and pop page.

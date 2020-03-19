@@ -19,7 +19,7 @@ document.addEventListener('init', function(event) {
 
       let storage = window.localStorage;
       for (let storageKey in storage) {
-        myApp.services.tasks.remettre(JSON.parse(storage.getItem(storageKey)));
+        myApp.services.tasks.remettre(storageKey, JSON.parse(storage.getItem(storageKey)));
       }
     }
   }

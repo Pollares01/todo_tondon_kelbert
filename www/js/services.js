@@ -26,14 +26,22 @@ myApp.services = {
         '</ons-list-item>'
       );
 
+
+      const storage = window.localStorage;
+
+
+      const num = ("tache" + storage.length);
       // Store data within the element.
+      data.num = num;
+
+
+      console.log(data)
+
       taskItem.data = data;
 
       const myJSON = JSON.stringify(data);
 
-      const storage = window.localStorage;
-
-      storage.setItem(("tache" + storage.length), myJSON);
+      storage.setItem(num, myJSON);
 
 
 
@@ -49,7 +57,7 @@ myApp.services = {
 
       // Add button functionality to remove a task.
       taskItem.querySelector('.right').onclick = function() {
-        myApp.services.tasks.remove(taskItem);
+        myApp.services.tasks.remove(num, taskItem);
       };
 
       // Add functionality to push 'details_task.html' page with the current element as a parameter.
@@ -79,7 +87,7 @@ myApp.services = {
     },
 
     // Modifies the inner data and current view of an existing task.
-    update: function(taskItem, data) {
+    update: function(taskItem, data, num) {
       if (data.title !== taskItem.data.title) {
         // Update title view.
         taskItem.querySelector('.center').innerHTML = data.title;
@@ -99,18 +107,30 @@ myApp.services = {
       taskItem.classList[data.highlight ? 'add' : 'remove']('highlight');
 
       // Store the new data within the element.
+      data.num = num;
       taskItem.data = data;
+
+
+      const myJSON = JSON.stringify(data);
+
+
+      console.log(num);
+
+      const storage = window.localStorage;
+      // storage.removeItem(num);
+      storage.setItem(num, myJSON);
+
     },
 
     // Deletes a task item and its listeners.
-    remove: function(taskItem) {
+    remove: function(num, taskItem) {
       taskItem.removeEventListener('change', taskItem.data.onCheckboxChange);
 
       myApp.services.animators.remove(taskItem, function() {
         // Remove the item before updating the categories.
 
         const storage = window.localStorage;
-        storage.
+        storage.removeItem(num);
 
         taskItem.remove();
         // Check if the category has no items and remove it in that case.
@@ -119,7 +139,7 @@ myApp.services = {
     },
 
     //meme code de create, mais sans la sauvegarde
-    remettre:  function(data) {
+    remettre:  function(num, data) {
       // Task item template.
       var taskItem = ons.createElement(
           '<ons-list-item tappable category="' + myApp.services.categories.parseId(data.category)+ '">' +
@@ -152,7 +172,7 @@ myApp.services = {
 
       // Add button functionality to remove a task.
       taskItem.querySelector('.right').onclick = function() {
-        myApp.services.tasks.remove(taskItem);
+        myApp.services.tasks.remove(num, taskItem);
       };
 
       // Add functionality to push 'details_task.html' page with the current element as a parameter.
