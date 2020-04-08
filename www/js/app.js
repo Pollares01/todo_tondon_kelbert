@@ -5,11 +5,11 @@ document.addEventListener('init', function(event) {
   var page = event.target;
 
 
-  console.log("bouton : " + document.getElementById('#buttonToutSuppr'));
-
-  document.getElementById('#buttonToutSuppr').addEventListener('click', function () {
-    console.log("prout");
-  });
+  // console.log("bouton : " + document.getElementById('#buttonToutSuppr'));
+  //
+  // document.getElementById('#buttonToutSuppr').addEventListener('click', function () {
+  //   console.log("prout");
+  // });
 
   // Each page calls its own initialization controller.
   if (myApp.controllers.hasOwnProperty(page.id)) {
