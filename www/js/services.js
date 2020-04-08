@@ -49,12 +49,18 @@ myApp.services = {
             taskItem.data.onCheckboxChange = function (event) {
                 myApp.services.animators.swipe(taskItem, function () {
                     let listId;
-                    if (taskItem.parentElement.id === 'pending-list' && event.target.checked) {
-                        listId = '#completed-list';
-                        data.state = 1;
-                    } else {
+                    if (taskItem.parentElement.id === 'pending-list') {
+                        listId = '#enCours-list';
+                        event.target.checked = false;
+                        data.state = 2;
+                    } else if (taskItem.parentElement.id === 'completed-list') {
                         listId = '#pending-list';
+                        event.target.checked = false;
                         data.state = 0;
+                    } else if(taskItem.parentElement.id === 'enCours-list'){
+                        listId = '#completed-list';
+                        event.target.checked = false;
+                        data.state = 1;
                     }
                     const myJSON = JSON.stringify(data);
                     const storage = window.localStorage;
@@ -177,11 +183,17 @@ myApp.services = {
                 myApp.services.animators.swipe(taskItem, function () {
                     let listId;
                     if (taskItem.parentElement.id === 'pending-list') {
-                        listId = '#completed-list';
-                        data.state = 1;
-                    } else {
+                        listId = '#enCours-list';
+                        event.target.checked = false;
+                        data.state = 2;
+                    } else if (taskItem.parentElement.id === 'completed-list') {
                         listId = '#pending-list';
+                        event.target.checked = false;
                         data.state = 0;
+                    } else if(taskItem.parentElement.id === 'enCours-list'){
+                        listId = '#completed-list';
+                        event.target.checked = false;
+                        data.state = 1;
                     }
                     const myJSON = JSON.stringify(data);
                     const storage = window.localStorage;
@@ -230,7 +242,12 @@ myApp.services = {
                 console.log("completee");
                 const completedList = document.querySelector('#completed-list');
                 console.log(document.querySelector('#completed-list'));
-                document.querySelector('#completed-list').insertBefore(taskItem, taskItem.data.urgent ? document.querySelector('#completed-list').firstChild : null);
+                document.querySelector('#completed-list').append(taskItem);
+            } else if(data.state === 2){
+                console.log("enCours");
+                const completedList = document.querySelector('#enCours-list');
+                console.log(document.querySelector('#enCours-list'));
+                document.querySelector('#enCours-list').append(taskItem);
             }
 
 

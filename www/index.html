@@ -51,6 +51,7 @@
                 <!-- Toolbar-button  only visible for iOS/other. -->
                 <ons-if platform="ios other">
                     <ons-toolbar-button component="button/new-task">Nouveau</ons-toolbar-button>
+                    <ons-toolbar-button id="buttonToutSuppr">Supprimer tout</ons-toolbar-button>
                 </ons-if>
             </div>
         </ons-toolbar>
@@ -64,7 +65,9 @@
 
         <!-- Auto-positioned Tabbar: top on Android, bottom on iOS/other. -->
         <ons-tabbar id="myTabbar" position="auto">
-            <ons-tab page="html/pending_tasks.html" label="En cours" active>
+            <ons-tab page="html/pending_tasks.html" label="A commencer" active>
+            </ons-tab>
+            <ons-tab page="html/enCours_tasks.html" label="En cours">
             </ons-tab>
             <ons-tab page="html/completed_tasks.html" label="Complétée">
             </ons-tab>
