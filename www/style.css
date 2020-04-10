@@ -16,18 +16,58 @@ ons-splitter-side[side="left"][animation="overlay"] {
 }
 
 .highlight {
-  background-color: lightyellow;
-  color: rgba(255, 0, 0, 0.7);
+  background-color: burlywood;
+  color: orangered;
 }
 
 .left-label {
   width: 30%;
   font-size: 16px;
-  color: #666
+  color: whitesmoke;
 }
 
+.page__background {
+  background-color:burlywood;
+}
 
+.toolbar,.tabbar.ons-tabbar__footer {
+  background-color: chocolate;
+}
 
+.tabbar__label {
+  color: whitesmoke;
+}
+
+.list {
+  background-color: gray;
+}
+
+.list-item {
+  color: whitesmoke;
+}
+
+.list-title {
+  font-size: initial;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.text-input {
+  background-color: white;
+}
+
+.center.list-item__center {
+  color: black;
+}
+
+.center.toolbar__center.toolbar__title {
+  color: blue;
+  font-weight: bold;
+}
+
+.center.list-item__center.list-item--nodivider__center {
+  color: whitesmoke;
+}
 /********************
  *** Animation CSS ***
  ********************/
