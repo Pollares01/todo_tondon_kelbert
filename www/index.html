@@ -51,7 +51,7 @@
                 <!-- Toolbar-button  only visible for iOS/other. -->
                 <ons-if platform="ios other">
                     <ons-toolbar-button component="button/new-task">Nouveau</ons-toolbar-button>
-                    <ons-toolbar-button id="buttonToutSuppr">Supprimer tout</ons-toolbar-button>
+                    <ons-toolbar-button component="button/new-task" component="dlTask" id="buttonToutSuppr">Supprimer tout</ons-toolbar-button>
                 </ons-if>
             </div>
         </ons-toolbar>
@@ -60,6 +60,9 @@
         <ons-if platform="android">
             <ons-fab position="right bottom" component="button/new-task">
                 <ons-icon icon="md-edit"></ons-icon>
+            </ons-fab>
+            <ons-fab position="left bottom" component="dlTask" id="buttonToutSupprAndroid">
+                <ons-icon icon="md-delete"></ons-icon>
             </ons-fab>
         </ons-if>
 

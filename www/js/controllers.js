@@ -13,6 +13,13 @@ myApp.controllers = {
       document.querySelector('#mySplitter').left.toggle();
     };
 
+    Array.prototype.forEach.call(page.querySelectorAll('[component="dlTask"]'), function(element){
+      element.onclick = function() {
+        myApp.services.tasks.toutSupp();
+      };
+      element.show && element.show();
+    });
+
     // Set button functionality to push 'new_task.html' page.
     Array.prototype.forEach.call(page.querySelectorAll('[component="button/new-task"]'), function(element) {
       element.onclick = function() {
