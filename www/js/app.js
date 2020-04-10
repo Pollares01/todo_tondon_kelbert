@@ -5,11 +5,6 @@ document.addEventListener('init', function(event) {
   var page = event.target;
 
 
-  // console.log("bouton : " + document.getElementById('#buttonToutSuppr'));
-  //
-  // document.getElementById('#buttonToutSuppr').addEventListener('click', function () {
-  //   console.log("prout");
-  // });
 
   // Each page calls its own initialization controller.
   if (myApp.controllers.hasOwnProperty(page.id)) {
@@ -18,7 +13,11 @@ document.addEventListener('init', function(event) {
 
   // Fill the lists with initial data when the pages we need are ready.
   // This only happens once at the beginning of the app.
-  if (page.id === 'menuPage' || page.id === 'pendingTasksPage') {
+  if (page.id === 'menuPage' || page.id === 'completedTasksPage') {
+    console.log("Bouton :" + document.querySelector('#buttonToutSuppr'));
+    document.querySelector('#buttonToutSuppr').onclick = function(){
+      myApp.services.tasks.toutSupp();
+    };
     if (document.querySelector('#menuPage')
       && document.querySelector('#pendingTasksPage')
       && !document.querySelector('#pendingTasksPage ons-list-item')

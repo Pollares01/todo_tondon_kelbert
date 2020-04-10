@@ -57,7 +57,7 @@ myApp.services = {
                         listId = '#pending-list';
                         event.target.checked = false;
                         data.state = 0;
-                    } else if(taskItem.parentElement.id === 'enCours-list'){
+                    } else if (taskItem.parentElement.id === 'enCours-list') {
                         listId = '#completed-list';
                         event.target.checked = false;
                         data.state = 1;
@@ -190,7 +190,7 @@ myApp.services = {
                         listId = '#pending-list';
                         event.target.checked = false;
                         data.state = 0;
-                    } else if(taskItem.parentElement.id === 'enCours-list'){
+                    } else if (taskItem.parentElement.id === 'enCours-list') {
                         listId = '#completed-list';
                         event.target.checked = false;
                         data.state = 1;
@@ -243,7 +243,7 @@ myApp.services = {
                 const completedList = document.querySelector('#completed-list');
                 console.log(document.querySelector('#completed-list'));
                 document.querySelector('#completed-list').append(taskItem);
-            } else if(data.state === 2){
+            } else if (data.state === 2) {
                 console.log("enCours");
                 const completedList = document.querySelector('#enCours-list');
                 console.log(document.querySelector('#enCours-list'));
@@ -255,9 +255,40 @@ myApp.services = {
             // var pendingList = document.querySelector('#pending-list');
             // pendingList.insertBefore(taskItem, taskItem.data.urgent ? pendingList.firstChild : null);
 
+        },
+
+
+        toutSupp() {
+            ons.notification.confirm({
+                title: 'Supprimer toutes les taches ?',
+                message: " ",
+                buttonLabels: ["Annuler", "Confirmer"],
+                callback: function (re) {
+                    switch (re) {
+                        case -1 :
+                            console.log("à coté");
+                            break;
+                        case 0 :
+                            console.log("non");
+                            break;
+                        case 1 :
+
+                            window.localStorage.clear();
+                            document.querySelectorAll('#enCours-list').forEach(function (e) {
+                                e.remove();
+                            });
+                            document.querySelectorAll('#pending-list').forEach(function (e) {
+                                e.remove();
+                            });
+                            document.querySelectorAll('#completed-list').forEach(function (e) {
+                                e.remove();
+                            });
+
+                            break;
+                    }
+                }
+            })
         }
-
-
     },
 
     /////////////////////
