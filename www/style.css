@@ -39,7 +39,7 @@ ons-splitter-side[side="left"][animation="overlay"] {
 }
 
 .list {
-  background-color: gray;
+  background-color: lightgray;
 }
 
 .list-item {
@@ -68,12 +68,24 @@ ons-splitter-side[side="left"][animation="overlay"] {
 .center.list-item__center.list-item--nodivider__center {
   color: whitesmoke;
 }
+.toolbar-button {
+  color: blue;
+}
+.list-item.highlight > .center.list-item__center{
+  color: red;
+  font-weight: bold;
+}
+
+.tabbar__item.active > .tabbar__label {
+  font-weight: bold;
+}
+
 /********************
  *** Animation CSS ***
  ********************/
 
 #tabbarPage .list {
-  background-color: grey;
+  background-color: lightgray;
   overflow-x: hidden;
   margin-top: -1px;
   border-bottom: 1px solid #ccc;
@@ -82,7 +94,7 @@ ons-splitter-side[side="left"][animation="overlay"] {
 #tabbarPage .list-item {
   min-height: 0;
   height: 44px;
-  background-color: white;
+  background-color: lightgray;
   margin: 1px 0 -1px 0;
 }
 
